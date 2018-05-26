@@ -18,9 +18,15 @@ def connect():
 
 socket = connect()
 
+data = ""
 while(True):
     try:
-        print socket.recv(1024)
+        data += socket.recv(1024)
+	data_end = data.find('\n')
+	if data_end != -1:
+		rec = data[:data_end]
+		print (data)
+		data = data[data_end+1:]
     except bluetooth.btcommon.BluetoothError as error:
         print "Caught BluetoothError: ", error
         time.sleep(5)
