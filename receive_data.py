@@ -27,7 +27,7 @@ def plant_value_as_json(plantValue):
     for sensorValue in sensorValues:
         splittedSensorValue = sensorValue.split("|")
         object[splittedSensorValue[0]] = splittedSensorValue[len(splittedSensorValue)-1]
-    return json.dumps(data)
+    return json.dumps(object)
 
 socket = connect()
 
