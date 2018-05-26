@@ -23,7 +23,7 @@ def handle_value(value):
 
 def plant_value_as_json(plantValue):
     object = {}
-    sensorValues = value.split("#")
+    sensorValues = plantValue.split("#")
     for sensorValue in sensorValues:
         splittedSensorValue = sensorValue.split("|")
         object[splittedSensorValue[0]] = sensorValue[splittedSensorValue[1]]
