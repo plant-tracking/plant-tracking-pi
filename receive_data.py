@@ -17,6 +17,18 @@ def connect():
             time.sleep(10)
     return socket;
 
+def handle_value(value):
+    print plant_value_as_json(value)
+    return
+
+def plant_value_as_json(plantValue):
+    object = {}
+    sensorValues = value.split("#")
+    for sensorValue in sensorValues:
+        splittedSensorValue = sensorValue.split("|")
+        object[splittedSensorValue[0]] = sensorValue[splittedSensorValue[1]]
+    return json.dumps(data)
+
 socket = connect()
 
 data = ""
@@ -34,16 +46,6 @@ while(True):
         socket = connect()
         pass
 
-def handle_value(value):
-    print plant_value_as_json(value)
-    return
 
-def plant_value_as_json(plantValue):
-    object = {}
-    sensorValues = value.split("#")
-    for sensorValue in sensorValues:
-        splittedSensorValue = sensorValue.split("|")
-        object[splittedSensorValue[0]] = sensorValue[splittedSensorValue[1]]
-    return json.dumps(data)
 
 
