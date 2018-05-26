@@ -1,6 +1,7 @@
 import bluetooth
 import serial
 import json
+import requests
 
 
 def connect():
@@ -18,13 +19,18 @@ def connect():
     return socket;
 
 def handle_value(value):
-    print plant_value_as_json(value)
+    payload = plant_value_as_json(value)
+    url = "asdf"
+    # r = requests.post(url, data=payload)
+    print(r.text)
     return
 
 def plant_value_as_json(plantValue):
     object = {}
     sensorValues = plantValue.split("#")
     for sensorValue in sensorValues:
+        if not sensorValue:
+            continue
         splittedSensorValue = sensorValue.split("|")
         object[splittedSensorValue[0]] = splittedSensorValue[len(splittedSensorValue)-1]
     return json.dumps(object)
