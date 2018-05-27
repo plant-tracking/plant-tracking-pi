@@ -39,9 +39,13 @@ def plant_value_request_objects(plantValue):
         if not sensorValue:
             continue
         splittedSensorValue = sensorValue.split("|")
+	if len(sensorValue) < 3:
+	   continue
 	object['plantId'] = 1
 	object['type'] = splittedSensorValue[0]
-	object['value'] = splittedSensorValue[len(splittedSensorValue)-1]
+	object['value'] = splittedSensorValue[1]
+	object['unit'] = splittedSensorValue[len(splittedSensorValue)-1]
+	#object['sensorId'] = index
 	objects.append(object)
     return objects
 
