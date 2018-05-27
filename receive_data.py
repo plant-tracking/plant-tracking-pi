@@ -18,22 +18,32 @@ def connect():
             time.sleep(10)
     return socket;
 
+def post_json(body):
+    url = "https://planttra.uber.space/nodejs/api/samples"
+    headers = {'Content-type': 'application/json'}
+    return requests.post(url, data=body, headers=headers)
+
 def handle_value(value):
-    payload = plant_value_as_json(value)
-    url = "asdf"
-    # r = requests.post(url, data=payload)
-    print(r.text)
+    objects = plant_value_request_objects(value)
+    for object in objects:
+	json_data = json.dumps(object)
+	print(json_data)
+	r = post_json(json_data)
     return
 
-def plant_value_as_json(plantValue):
-    object = {}
+def plant_value_request_objects(plantValue):
+    objects = []
     sensorValues = plantValue.split("#")
     for sensorValue in sensorValues:
+        object = {}
         if not sensorValue:
             continue
         splittedSensorValue = sensorValue.split("|")
-        object[splittedSensorValue[0]] = splittedSensorValue[len(splittedSensorValue)-1]
-    return json.dumps(object)
+	object['plantId'] = 1
+	object['type'] = splittedSensorValue[0]
+	object['value'] = splittedSensorValue[len(splittedSensorValue)-1]
+	objects.append(object)
+    return objects
 
 socket = connect()
 
