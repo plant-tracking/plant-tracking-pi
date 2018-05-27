@@ -58,7 +58,7 @@ while(True):
         data_end = data.find('\n')
         if data_end != -1:
             rec = data[:data_end]
-            handle_value(data)
+            handle_value(rec)
             data = data[data_end+1:]
     except bluetooth.btcommon.BluetoothError as error:
         print "Caught BluetoothError: ", error
